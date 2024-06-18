@@ -1,0 +1,15 @@
+---
+- name: Run show command on Cisco IOS-XE switches
+  hosts: ios_xe_switches
+  gather_facts: no
+  tasks:
+    - name: show connected AP each switches 
+      cisco.ios.ios_command:
+        commands:
+          - show int des | in AP
+      register: show_output
+
+    - name: Display command output
+      debug:
+        var: show_output.stdout
+
